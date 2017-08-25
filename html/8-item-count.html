@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title></title>
+    </head>
+    <body>
+    <script>
+    window.onload=function loadTest(){
+        var sto=0;
+        for(var i=0;i<1000;i++){
+            sto+=randInt(0,10);
+        }
+        var emulationResult = 0;
+        var img = [0,0,0,0,0,0,0,0,0];
+        for(var i=0;i<100000;i++){
+            var sto=new Array();
+            var itm=new Array(1,2,3,4,5,6,7,8);
+            //1.Generating source data
+            for(var j=8;j>0;j--){
+                var opNow = randInt(0,itm.length-1);
+                sto.push(itm[opNow]);
+                itm = rm1(itm, opNow);
+            }
+            //2.Generating output data
+            var sto2=new Array();
+            var itm2=new Array(1,2,3,4,5,6,7,8);
+            for(var j=8;j>0;j--){
+                var opNow = randInt(0,itm2.length-1);
+                sto2.push(itm2[opNow]);
+                itm2 = rm1(itm2, opNow);
+            }
+            //3.Comparing
+            var errorCount=0;
+            for(var j=0;j<8;j++){
+                if(sto[j] != sto2[j]){
+                    errorCount++;
+                }
+            }
+            //4.storageResult
+            img[errorCount]++;
+            emulationResult+=errorCount;
+        }
+        console.log("Avg:" + emulationResult/100000);
+        for(var i=0;i<9;i++){
+            console.log(i+" "+returnLines(Math.floor(img[i]/maxOfArray(img)*100),100)+" "+img[i]);
+        }
+        function maxOfArray(arr){
+            var tmp=-1;
+            for(var i=0;i<arr.length;i++){
+                if(arr[i]>tmp){
+                    tmp=arr[i];
+                }
+            }
+            return tmp;
+        }
+        function returnLines(count,max){
+            var sto = "";
+            for(var i=0;i<max;i++){
+                if(i<count){
+                    sto = sto + "|";
+                }else{
+                    sto += " ";
+                }
+            }
+            return sto;
+        }
+        function randInt(lower, upper){
+            return Number((Math.random()*(upper-lower)+lower).toFixed(0));
+        }
+        function rm1(arr, index){
+            if(index == 0){
+                return arr.slice(1,arr.length);
+            }else if(index == arr.length-1){
+                return arr.slice(0,arr.length-1);
+            }else if(index<0 || index>arr.length-1){
+                return undefined;
+            }else{
+                return (arr.slice(0,index)).concat(arr.slice(index+1));
+            }
+        }
+    }
+    </script>
+    <div id="result">
+        See console for more.
+    </div>
+    </body>
+</html>
