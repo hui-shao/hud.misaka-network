@@ -1,3 +1,4 @@
+import copy
 print("Ex 1-1-1 fibonacci in recursive")
 
 
@@ -7,7 +8,7 @@ def fib1(n):
     return fib1(n-1) + fib1(n-2)
 
 
-print(fib1(34))
+#print(fib1(34))
 
 
 print("Ex 1-1-2 fibonacci in recursive(enhanced)")
@@ -25,10 +26,10 @@ def fib2(n):
     if n <= 2:
         return 1
     if sto[n-1] == -1:
-        sto[n - 1] = fib2(n - 1)
+        sto[n-1] = fib2(n-1)
     if sto[n-2] == -1:
-        sto[n - 2] = fib2(n - 2)
-    sto[n] = sto[n - 1] + sto[n - 2]
+        sto[n-2] = fib2(n-2)
+    sto[n] = sto[n-1] + sto[n-2]
     return sto[n]
 
 
@@ -47,4 +48,31 @@ def hanoi(count, post):
 
 
 posts = ["a", "b", "c"]
-hanoi(5, posts)
+hanoi(3, posts)
+
+
+print("Ex 1-3 permutation puzzle")
+
+
+def perm(list):
+    for i in range(len(list)):
+        perm_sto = copy.deepcopy(list[i])
+        for j in range(len(list[i])):
+            perm_sto2 = [perm_sto[i]]
+            del perm_sto[i]
+            if len(list[i]) == 1:
+                print(list[i])
+                d = list[i]
+                return list[i]
+            elif len(list[i]) > 1:
+                list_sto = []
+                for j in range(len(list[i])):
+                    perm_output = perm(perm_sto) + perm_sto2
+                    print(perm_output)
+                    list_sto += perm_output
+                return list_sto
+            else:
+                return -1
+
+
+perm([[1, 2, 3, 4]])
