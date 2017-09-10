@@ -1,4 +1,3 @@
-import copy
 print("Ex 1-1-1 fibonacci in recursive")
 
 
@@ -8,7 +7,7 @@ def fib1(n):
     return fib1(n-1) + fib1(n-2)
 
 
-#print(fib1(34))
+# print(fib1(34))
 
 
 print("Ex 1-1-2 fibonacci in recursive(enhanced)")
@@ -54,25 +53,16 @@ hanoi(3, posts)
 print("Ex 1-3 permutation puzzle")
 
 
-def perm(list):
-    for i in range(len(list)):
-        perm_sto = copy.deepcopy(list[i])
-        for j in range(len(list[i])):
-            perm_sto2 = [perm_sto[i]]
-            del perm_sto[i]
-            if len(list[i]) == 1:
-                print(list[i])
-                d = list[i]
-                return list[i]
-            elif len(list[i]) > 1:
-                list_sto = []
-                for j in range(len(list[i])):
-                    perm_output = perm(perm_sto) + perm_sto2
-                    print(perm_output)
-                    list_sto += perm_output
-                return list_sto
-            else:
-                return -1
+def perm(n, begin, end):
+    if begin >= end:
+        print(n)
+    else:
+        j = begin
+        for i in range(begin, end):
+            n[i], n[j] = n[j], n[i]
+            perm(n, begin + 1, end)
+            n[i], n[j] = n[j], n[i]
 
 
-perm([[1, 2, 3, 4]])
+n = [1, 2, 3, 4]
+perm(n, 0, len(n))
