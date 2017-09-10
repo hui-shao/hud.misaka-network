@@ -7,7 +7,7 @@ def fib1(n):
     return fib1(n-1) + fib1(n-2)
 
 
-# print(fib1(34))
+print(fib1(34))
 
 
 print("Ex 1-1-2 fibonacci in recursive(enhanced)")
