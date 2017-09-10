@@ -1,4 +1,4 @@
-print("Ex 1-1 fibonacci in recursive")
+print("Ex 1-1-1 fibonacci in recursive")
 
 
 def fib1(n):
@@ -10,7 +10,7 @@ def fib1(n):
 print(fib1(34))
 
 
-print("Ex 1-2 fibonacci in recursive(enhanced)")
+print("Ex 1-1-2 fibonacci in recursive(enhanced)")
 
 
 sto = [-1, 1, 1]
@@ -33,3 +33,18 @@ def fib2(n):
 
 
 print(fib2(34))
+
+
+print("Ex 1-2 hanoi puzzle")
+
+
+def hanoi(count, post):
+    # our goal is move it from source to target(a to b)
+    if count >= 1:
+        hanoi(count - 1, post[0] + post[2] + post[1])
+        print(post[0], "->", post[1])
+        hanoi(count - 1, post[2] + post[1] + post[0])
+
+
+posts = ["a", "b", "c"]
+hanoi(5, posts)
