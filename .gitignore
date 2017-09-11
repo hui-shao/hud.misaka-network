@@ -5,3 +5,6 @@
 # IntelliJ project files
 .idea
 .gitignore
+
+# gadget ignore
+gadgets/battery-report.html
