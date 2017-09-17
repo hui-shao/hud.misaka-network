@@ -25,37 +25,48 @@ def partition(repo, left, right, pin):
 repo = [x for x in range(1, 20)]
 random.shuffle(repo)
 
+print("before: ", repo)
+
 qs(repo, 0, 18)
 
-print(repo)
+print("after: ", repo)
 
 del repo
 
 print("Ex 2-1-2 merge sort")
 
 
-def merge_sort(repo):
-    i = 0
-    while True:
-        if i >= len(repo):
-            break
-        # Step 1: separate
-        sub_repo = []
-        j = 0
-        while True:
-            sub_repo += [repo[j:j+2**i]]
-            j += 2**i
-            if j >= len(repo):
-                break
-        repo = []
-        # Step 2: merge
-        for j in range(0, len(sub_repo) - 2):
-            while True:
-                pin1, pin2 = 0, 0
-                if pin1 >= len(sub_repo[j]):
-                    # Some end process here
-                    break
-                if pin2 >= len(sub_repo[j + 1]):
-                    # Some end process here
-                    break
-                if sub_repo[j][pin1] >= sub_repo[j+1][pin2]
+def merge_sort(seq):
+    if len(seq) <= 1:
+        return seq
+    mid = int(len(seq) / 2)
+    left = merge_sort(seq[:mid])
+    right = merge_sort(seq[mid:])
+    return merge(left, right)
+
+
+def merge(left, right):
+    result = []
+    i, j = 0, 0
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    result += left[i:]
+    result += right[j:]
+    return result
+
+
+repo = [x for x in range(1, 20)]
+random.shuffle(repo)
+
+print("before: ", repo)
+
+repo = merge_sort(repo)
+
+print("after: ", repo)
+
+del repo
