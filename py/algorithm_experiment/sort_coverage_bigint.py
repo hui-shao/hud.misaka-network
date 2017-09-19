@@ -85,6 +85,67 @@ def show_board(board):
         print("")
 
 
+def board(sto, x, y, size):
+    global step
+    if size == 1:
+        return 0
+    step += 1
+
+    location = index_in_matrix(sto, -1)
+    CONST_LOCATION_LEFT_TOP = 495855600
+    CONST_LOCATION_RIGHT_TOP = 495855601
+    CONST_LOCATION_LEFT_BOTTOM = 495855602
+    CONST_LOCATION_RIGHT_BOTTOM = 495855603
+
+    splitter = int(size / 2 - 1)
+
+    '''
+                   y
+        +---------->
+        |
+        |
+        |
+        |
+      x ↓
+
+    '''
+
+    if location[0] <= splitter + x:
+        if location[1] <= splitter + y:
+            location = CONST_LOCATION_LEFT_TOP
+        else:
+            location = CONST_LOCATION_RIGHT_TOP
+    else:
+        if location[1] <= splitter + y:
+            location = CONST_LOCATION_LEFT_BOTTOM
+        else:
+            location = CONST_LOCATION_RIGHT_BOTTOM
+
+    location_map = [[1, 1], [1, 1]]
+
+    if location == CONST_LOCATION_LEFT_TOP:
+        location_map[0][0] = 0
+    elif location == CONST_LOCATION_RIGHT_TOP:
+        location_map[0][1] = 0
+    elif location == CONST_LOCATION_LEFT_BOTTOM:
+        location_map[1][0] = 0
+    elif location == CONST_LOCATION_RIGHT_BOTTOM:
+        location_map[1][1] = 0
+    else:
+        return False
+
+    for i in range(2):
+        for j in range(2):
+            if location_map[i][j] == 1:
+                sto[splitter + i + x][splitter + j + y] = step
+
+    size = int(size / 2)
+    board(sto, x, y, size)
+    board(sto, x + splitter, y + splitter, size)
+    board(sto, x, y + splitter, size)
+    board(sto, x + splitter, y, size)
+
+
 def my_base64(number):
     li = "·ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_"
     return li[number]
@@ -97,25 +158,20 @@ def index_in_matrix(matrix, value):
     return False
 
 
-size = 2**3
+size = 2 ** 3
 print("problem size: ", size)
 
-board = []
-for i in range(size-1):
-    board += [[0] * size]
+board_sto = []
+for i in range(size - 1):
+    board_sto += [[0] * size]
 
-bad_sector = random.sample(range(0, size-1), 2)
+bad_sector = random.sample(range(0, size - 1), 2)
 print("bad sector is located at ", bad_sector)
-board[bad_sector[0]][bad_sector[1]] = -1
-show_board(board)
-
+board_sto[bad_sector[0]][bad_sector[1]] = -1
 step = 0
 
+show_board(board_sto)
 
-def board(x, y, size):
-    global step
-    if size == 1:
-        return 0
-    step += 1
-    size = int(size / 2)
+board(board_sto, 0, 0, size)
 
+show_board(board_sto)
