@@ -154,7 +154,7 @@ def board(sto, x, y, size):
 
 def my_base64(number):
     li = "·ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_"
-    return li[number]
+    return li[number % len(li)]
 
 
 def index_in_matrix(matrix, value):
