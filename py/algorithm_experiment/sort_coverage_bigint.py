@@ -70,3 +70,52 @@ repo = merge_sort(repo)
 print("after: ", repo)
 
 del repo
+
+print("Ex 2-2 coverage")
+
+
+def show_board(board):
+    print("board status:")
+    for i in range(len(board)):
+        for j in range(len(board)):
+            if board[i][j] == -1:
+                print("#", end=' ')
+            else:
+                print(my_base64(board[i][j]), end=' ')
+        print("")
+
+
+def my_base64(number):
+    li = "·ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_"
+    return li[number]
+
+
+def index_in_matrix(matrix, value):
+    for i in range(len(matrix)):
+        if value in matrix[i]:
+            return [i, matrix[i].index(value)]
+    return False
+
+
+size = 2**3
+print("problem size: ", size)
+
+board = []
+for i in range(size-1):
+    board += [[0] * size]
+
+bad_sector = random.sample(range(0, size-1), 2)
+print("bad sector is located at ", bad_sector)
+board[bad_sector[0]][bad_sector[1]] = -1
+show_board(board)
+
+step = 0
+
+
+def board(x, y, size):
+    global step
+    if size == 1:
+        return 0
+    step += 1
+    size = int(size / 2)
+
