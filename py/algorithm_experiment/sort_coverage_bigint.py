@@ -87,11 +87,12 @@ def show_board(board):
 
 def board(sto, x, y, size):
     global step
-    if size == 1:
-        return 0
-    step += 1
 
-    location = index_in_matrix(sto, -1)
+    if step == 0:
+        location = index_in_matrix(sto, -1)
+    else:
+        location = index_not_zero_in_matrix(sto, x, y, size)
+
     CONST_LOCATION_LEFT_TOP = 495855600
     CONST_LOCATION_RIGHT_TOP = 495855601
     CONST_LOCATION_LEFT_BOTTOM = 495855602
@@ -134,16 +135,21 @@ def board(sto, x, y, size):
     else:
         return False
 
+    step += 1
+
     for i in range(2):
         for j in range(2):
             if location_map[i][j] == 1:
                 sto[splitter + i + x][splitter + j + y] = step
 
     size = int(size / 2)
+    if size <= 1:
+        return 0
+
     board(sto, x, y, size)
-    board(sto, x + splitter, y + splitter, size)
-    board(sto, x, y + splitter, size)
-    board(sto, x + splitter, y, size)
+    board(sto, x + splitter + 1, y, size)
+    board(sto, x, y + splitter + 1, size)
+    board(sto, x + splitter + 1, y + splitter + 1, size)
 
 
 def my_base64(number):
@@ -158,14 +164,25 @@ def index_in_matrix(matrix, value):
     return False
 
 
+def index_not_zero_in_matrix(matrix, x, y, size):
+    for i in range(x, x + size):
+        for j in range(y, y + size):
+            print("matrix[", i, "][", j, "] = ", matrix[i][j])
+            if matrix[i][j] != 0:
+                print("returning true. size =", size, )
+                return [i, j]
+    print("returning false. size =", size,)
+    return False
+
+
 size = 2 ** 3
 print("problem size: ", size)
 
 board_sto = []
-for i in range(size - 1):
+for i in range(size):
     board_sto += [[0] * size]
 
-bad_sector = random.sample(range(0, size - 1), 2)
+bad_sector = random.sample(range(size), 2)
 print("bad sector is located at ", bad_sector)
 board_sto[bad_sector[0]][bad_sector[1]] = -1
 step = 0
