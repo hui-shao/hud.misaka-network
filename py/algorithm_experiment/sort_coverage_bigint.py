@@ -167,11 +167,8 @@ def index_in_matrix(matrix, value):
 def index_not_zero_in_matrix(matrix, x, y, size):
     for i in range(x, x + size):
         for j in range(y, y + size):
-            print("matrix[", i, "][", j, "] = ", matrix[i][j])
             if matrix[i][j] != 0:
-                print("returning true. size =", size, )
                 return [i, j]
-    print("returning false. size =", size,)
     return False
 
 
