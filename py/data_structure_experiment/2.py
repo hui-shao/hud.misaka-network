@@ -58,3 +58,23 @@ for i in range(0, 4):
                       "    |     ", str(i), "     |    ", str(j),
                       "    |     ", str(k))
                 counter += 1
+
+
+del b
+
+print("Ex 2-3 ---------------------------------------------")
+n = int(input("how many students are in your class?"))
+print("please input a student three scores:")
+sto = []
+for i in range(0, n):
+    sto += [input("the no." + str(i + 1) + ":  ")]
+
+summary = 0
+print(" num        a    b    c     av")
+for i in range(0, n):
+    curr = sto[i].split(",")
+    summary += (int(curr[0]) + int(curr[1]) + int(curr[2])) / 3
+    print(" " + str(i) + " " * 10 + curr[0] + " " * 3 + curr[1] +
+          " " * 3 + curr[2] + " " * 5 + str((int(curr[0]) + int(curr[1]) + int(curr[2])) / 3))
+
+print("average of the class=" + str(summary / n))
