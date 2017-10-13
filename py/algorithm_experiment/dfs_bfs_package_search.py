@@ -91,7 +91,71 @@ def bfs_explore():
 
 search("bfs")
 
+
+print("Ex 3-3 DFS searching 0-1 package problem")
+# Hey, we got a hatchling destroyer and some shield equipment here.
+# Different equipment needs different power and give different shield.
+# We only have fixed power so we must find a way to give her the most shield.
+
+# Generate data
+power = [x for x in range(0, SCALE_OF_DATA)]
+shield = [x for x in range(0, SCALE_OF_DATA)]
+random.shuffle(power)
+random.shuffle(shield)
+maximum_power = random.randint(0, SCALE_OF_DATA * 2)
+
+
+solution = [0,          0,         []]
+#          [shield_sum, power_sum, [method of pick up]]
+
+
+def package_dfs():
+    package_dfs_explore(0, solution)
+
+    def progress_bar(value, max_value, width):
+        value = int(value)
+        max_value = int(max_value)
+        width = int(width)
+        bar = "-" * width
+        bar_fill_width = int(value / max_value * width)
+        bar = "#" * bar_fill_width + bar[bar_fill_width:]
+        return bar
+
+    print("""
+        EQUIPMENT PICK METHOD -------------------------------------
+        ID = Misaka_0x447f hatchling destroyer's pick method
+        SHIELD = """ + str(solution[0] + 1) + " / " + str(solution[0] + 1) + """ kRes.  100%
+                 """ + progress_bar(100, 100, 50) + """
+        POWER LOAD = """ + str(solution[1]) + " / " + str(maximum_power) + """ MW  """ + str(int(solution[1] / maximum_power * 100)) + """%
+                 """ + progress_bar(solution[1], maximum_power, 50) + """
+        *** EQUIPMENT LIST ***
+        """ + str(solution[2]) + """
+        -----------------------------------------------------------
+    """)
+
+
+def package_dfs_explore(location, prev_solution):
+    global solution
+    if prev_solution[1] >= maximum_power or location > SCALE_OF_DATA - 1:
+        return False
+    if prev_solution[0] > solution[0]:
+        solution = prev_solution
+    # in case of pick this...
+    pick_this = copy.deepcopy(prev_solution)
+    pick_this[0] += shield[location]
+    pick_this[1] += power[location]
+    pick_this[2] += [location]
+    package_dfs_explore(location + 1, pick_this)
+    # in case of not pick this...
+    not_pick_this = copy.deepcopy(prev_solution)
+    package_dfs_explore(location + 1, not_pick_this)
+
+
+package_dfs()
+
+
 print("Ex 3-4 100 item with 100 coin")
+
 
 for a in range(0, 20):
     for b in range(0, 33):
