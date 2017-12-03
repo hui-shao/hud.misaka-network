@@ -27,20 +27,20 @@ class Hashrate:
         return 0
 
 
-print("二五仔: Generating Puzzle")
+print("猛男: Generating Puzzle")
 
 puzzle = random.randint(0, 100000000000)
 
 zero_prefix = 6
 
-print("二五仔: Puzzle - find a string or number that ends with " + str(puzzle)
+print("猛男: Puzzle - find a string or number that ends with " + str(puzzle)
       + " and its sha256 starts with " + "0" * zero_prefix)
 
 data_sent_puzzle = str(puzzle)
 
 data_sent_zero_prefix = zero_prefix
 
-print("秦喵喵: Working on it...")
+print("秦川: Working on it...")
 
 i = 0
 timer1_queue = queue.Queue()
@@ -51,21 +51,21 @@ while True:
     timer1_queue.put(i)
     if str(hashlib.sha256((str(i) + data_sent_puzzle).encode("utf-8")).hexdigest())[0:data_sent_zero_prefix]\
             == "0" * data_sent_zero_prefix:
-        print("秦喵喵: 我摸到啦！")
-        print("秦喵喵: Solution  " + str(i) + str(data_sent_puzzle))
-        print("秦喵喵: SHA256    " + hashlib.sha256((str(i) + data_sent_puzzle).encode("utf-8")).hexdigest())
+        print("秦川: 我摸到啦！")
+        print("秦川: Solution  " + str(i) + str(data_sent_puzzle))
+        print("秦川: SHA256    " + hashlib.sha256((str(i) + data_sent_puzzle).encode("utf-8")).hexdigest())
         break
     i += 1
 
 data_return_str = str(i) + str(data_sent_puzzle)
 timer1.stop()
-print("二五仔: Auth...")
+print("猛男: Auth...")
 
 if str(hashlib.sha256(data_return_str.encode("utf-8")).hexdigest())[0:zero_prefix] == "0" * zero_prefix:
-    print("二五仔: 似李！缺！")
-    print("二五仔: Received  " + data_return_str)
-    print("二五仔: SHA256    " + str(hashlib.sha256(data_return_str.encode("utf-8")).hexdigest()))
+    print("猛男: 似李！缺！")
+    print("猛男: Received  " + data_return_str)
+    print("猛男: SHA256    " + str(hashlib.sha256(data_return_str.encode("utf-8")).hexdigest()))
 else:
-    print("二五仔: 秦川一样的返回值")
-    print("二五仔: Received  " + data_return_str)
-    print("二五仔: SHA256    " + str(hashlib.sha256(data_return_str.encode("utf-8")).hexdigest()))
+    print("猛男: 秦川一样的返回值")
+    print("猛男: Received  " + data_return_str)
+    print("猛男: SHA256    " + str(hashlib.sha256(data_return_str.encode("utf-8")).hexdigest()))
