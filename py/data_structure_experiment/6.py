@@ -69,8 +69,7 @@ class Graph:
             self.UFlag.Temp.visited = [False] * len(self.node)
             dfs_core(self.edge, self.UFlag.Temp.solution, self.UFlag.Temp.visited, [i])
 
-        for i in range(len(self.UFlag.Temp.solution)):
-            print(self.UFlag.Temp.solution[i])
+        return self.UFlag.Temp.solution
 
 
 Temp.nodes = [
@@ -90,4 +89,16 @@ Database.graph1.print_edges()
 print("Links:")
 Database.graph1.print_edge_table()
 print("dfs:")
-Database.graph1.dfs_legacy()
+Temp.dfs_data = Database.graph1.dfs_legacy()
+for i in range(len(Temp.dfs_data)):
+    print(Temp.dfs_data[i])
+
+print("bfs:")
+i = 0
+while len(Temp.dfs_data) > 0:
+    for j in range(len(Temp.dfs_data)):
+        if i == Temp.dfs_data[j][0]:
+            print(Temp.dfs_data[j])
+            Temp.dfs_data.pop(j)
+            break
+    i = (i + 1) % len(Database.graph1.node)
