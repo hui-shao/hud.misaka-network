@@ -1,0 +1,41 @@
+html{
+    font-family: "Microsoft JhengHei UI", "MS Gothic", sans-serif;
+    font-size: 16px;
+    background: url(active.jpg) no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+#left-bottom-hud-1{
+    color: #fff;
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+}
+#left-top-hud-1{
+    color: #fff;
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+}
+.hud-monospace{
+    font-family: "MS Gothic", monospace;
+}
+.large-indicator{
+    font-size: 1.5rem;
+}
+.hud-title{
+    border-left: solid 0.1rem rgba(255, 255, 255, 0.2);
+    padding: 0.1rem 0.2rem;
+}
+.system-green{
+    color: #74dfff;
+}
+.system-red{
+    background-color: rgba(255, 127, 78, 0.5);
+    border-left: solid 0.1rem #ff0006;
+}
+.system-yellow{
+    background-color: rgba(205, 255, 44, 0.5);
+    border-left: solid 0.1rem #cdff2c;
+}
