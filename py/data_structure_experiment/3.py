@@ -1,13 +1,47 @@
-print("init")
-pointerSto = []
+print("1: std list")
+std_li = []
 print("insert a, b, c, d, e")
-temp = {
+temp1 = {
     "a": 1, "b": 2,
     "c": 3, "d": 4,
     "e": 5
 }
-for i in temp:
-    pointerNewSto = pointerSto + [temp[i]]
+for i in temp1:
+    std_li += [temp1[i]]
+
+print("print table")
+print(std_li)
+print("print table length")
+print(len(std_li))
+print("is empty")
+print(len(std_li) == 0)
+print("3rd element")
+print(std_li[2])
+print("location of element a")
+for i in range(0, len(std_li)):
+    if std_li[i] == 1:
+        print(i)
+print("insert element f at 4")
+std_li = std_li[0:3] + [6] + std_li[4:]
+print("print table")
+print(std_li)
+print("delete 3rd elem")
+del std_li[3]
+print("print table")
+print(std_li)
+print("release table")
+del std_li
+
+print("2: std link list")
+pointerSto = []
+print("insert a, b, c, d, e")
+temp2 = {
+    "a": 1, "b": 2,
+    "c": 3, "d": 4,
+    "e": 5
+}
+for i in temp2:
+    pointerNewSto = pointerSto + [temp2[i]]
     pointerSto = pointerNewSto
     del pointerNewSto
 
@@ -24,7 +58,7 @@ print("print 3rd element in the table")
 print(pointerSto[2])
 print("print the location of the element a")
 for i in range(0, len(pointerSto)):
-    if pointerSto[i] == 3:
+    if pointerSto[i] == 1:
         print(i)
 print("insert f")
 f = 6
@@ -203,3 +237,37 @@ class LinkList(object):
         else:
             return -1
 
+
+print("3: round list")
+li = []
+print("insert a, b, c, d, e")
+temp1 = {
+    "a": 1, "b": 2,
+    "c": 3, "d": 4,
+    "e": 5
+}
+for i in temp1:
+    li += [temp1[i]]
+
+print("print table")
+print(li)
+print("print table length")
+print(len(li))
+print("is empty")
+print(len(li) == 0)
+print("3rd element")
+print(li[2])
+print("location of element a")
+for i in range(0, len(li)):
+    if li[i] == 1:
+        print(i)
+print("insert element f at 4")
+li = li[0:3] + [6] + li[4:]
+print("print table")
+print(li)
+print("delete 3rd elem")
+del li[3]
+print("print table")
+print(li)
+print("release table")
+del li
