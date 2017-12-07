@@ -49,7 +49,6 @@ document.onmousemove = document.onmousewheel = document.onmousedown = function(e
         Math.abs(lastX - event.pageX) > 40 &&
         Math.abs(lastY - event.pageY) > 40){
         screen_console_log("Welcome back, Misaka_0x447f.");
-        screen_console_log("It has been: " + friendly_time_duration_eng(idle_time) + " since your last login.");
         screen_console_log("Initializing HUD");
     }
 
