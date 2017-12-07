@@ -1,6 +1,6 @@
 html{
     font-family: "Source Code Pro", "Microsoft JhengHei UI", sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     background: url(wallpaper.jpg) no-repeat;
     background-size: cover;
     width: 100%;
@@ -13,16 +13,17 @@ html{
     bottom: 3rem;
     /*transform: rotate3d(0~1, 0~1, 0~1, angle)*/
     transform: rotate3d(0.15, 0, -0.015, 15deg);
-    padding-right: 0.2rem;
 }
 #left-top-hud-1{
     color: #fff;
     position: absolute;
     left: 3rem;
     top: 5rem;
-    border-left: solid 0.1rem rgba(255, 255, 255, 0.6);
-    padding: 0.1rem 0.5rem;
     transform: rotate3d(-0.15, 0, 0.015, 15deg);
+}
+.border-me{
+    border-left: solid 0.1rem rgba(255, 255, 255, 0.6);
+    padding: 0 0.5rem
 }
 .hud-title{
     font-family: "Source Code Pro", "Consolas", "MS Gothic", monospace;

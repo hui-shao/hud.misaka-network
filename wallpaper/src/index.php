@@ -14,7 +14,7 @@
         recognized
     </div>
 -->
-    <div id="left-top-hud-1" class="hud">
+    <div id="left-top-hud-1" class="hud border-me">
         <span class="hud small-indicator">
             link up
         </span>
@@ -33,8 +33,20 @@
         </span>
     </div>
     <div id="left-bottom-hud-1" class="hud">
-        <div id="left-bottom-hud-1-clock">
-                meaningless text
+        <div id="console" class="hud-title">
+            CONSOLE
+        </div>
+        <div id="console-content" class="border-me small-indicator">
+            _
+        </div>
+        <div id="left-bottom-hud-1-pass" style="background: transparent;">
+            <span class="hud-title" style="border: 0;"> </span>
+        </div>
+        <div id="left-bottom-hud-1-active-monitor" class="border-me small-indicator">
+            最后活动
+            <span id="left-bottom-hud-1-active-monitor-timer">
+                  0秒前
+            </span>
         </div>
         <div id="left-bottom-hud-1-pass" style="background: transparent;">
             <span class="hud-title" style="border: 0;"> </span>
@@ -44,17 +56,17 @@
             55F 42% +03atm
         </div>
         <div id="left-bottom-hud-1-iff">
-            <span class="hud-title system-red">IFF</span>
-            脱机 - 3小时前
+            <span class="hud-title">IFF</span>
+            联机
         </div>
         <div id="left-bottom-hud-1-fcs">
             <span class="hud-title">FCS</span>
-                状态存疑/不稳定 - 等待后续判断
+                联机
         </div>
         <div id="left-bottom-hud-1-dur">
-            <span class="hud-title system-yellow">DUR</span>
-            <span class="hud-progressbar">
-                IIIIIIIIII III<span style="opacity: 0.2">IIIIIII IIIIIIIIII IIIIIIIIII IIIIIIIIII</span>
+            <span class="hud-title">CAP</span>
+            <span id="hud-progressbar" class="hud-progressbar">
+                unknown
             </span>
         </div>
     </div>
