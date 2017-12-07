@@ -1,7 +1,7 @@
 html{
-    font-family: "Microsoft JhengHei UI", "MS Gothic", sans-serif;
-    font-size: 16px;
-    background: url(active.jpg) no-repeat;
+    font-family: "Source Code Pro", "Microsoft JhengHei UI", sans-serif;
+    font-size: 22px;
+    background: url(wallpaper.jpg) no-repeat;
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -9,41 +9,74 @@ html{
 #left-bottom-hud-1{
     color: #fff;
     position: absolute;
-    left: 2rem;
+    left: 3rem;
     bottom: 3rem;
     /*transform: rotate3d(0~1, 0~1, 0~1, angle)*/
     transform: rotate3d(0.15, 0, -0.015, 15deg);
-    background: rgba(255,255,255,0.2);
     padding-right: 0.2rem;
 }
 #left-top-hud-1{
     color: #fff;
     position: absolute;
-    left: 2rem;
-    top: 3rem;
+    left: 3rem;
+    top: 5rem;
     border-left: solid 0.1rem rgba(255, 255, 255, 0.6);
     padding: 0.1rem 0.5rem;
     transform: rotate3d(-0.15, 0, 0.015, 15deg);
-    background: rgba(255,255,255,0.2);
-}
-.hud-monospace{
-    font-family: "MS Gothic", monospace;
-}
-.large-indicator{
-    font-size: 1.5rem;
 }
 .hud-title{
-    border-left: solid 0.1rem rgba(255, 255, 255, 0.4);
-    padding: 0.1rem 0.5rem;
+    font-family: "Source Code Pro", "Consolas", "MS Gothic", monospace;
+    border-left: solid 0.1rem rgba(255, 255, 255, 0.6);
+    padding: 0 0.5rem;
+}
+.hud-progressbar{
+    font-family: "Microsoft JhengHei UI", sans-serif;
+}
+.large-indicator{
+    font-size: 1.3rem;
+}
+.small-indicator{
+    font-size: 0.75rem;
 }
 .system-green{
     color: #74dfff;
 }
+@keyframes system-red{
+    0% {
+        background-color: rgba(255, 127, 78, 0.5);
+        border-left: solid 0.1rem rgba(255, 0, 0, 1);
+    }
+    50% {
+        background-color: rgba(255, 127, 78, 0);
+        border-left: solid 0.1rem rgba(255, 255, 255, 0.6);
+    }
+    100% {
+        background-color: rgba(255, 127, 78, 0.5);
+        border-left: solid 0.1rem rgba(255, 0, 0, 1);
+    }
+}
 .system-red{
+    animation-name: system-red;
+    animation-duration: 0.33s;
+    animation-iteration-count: infinite;
     background-color: rgba(255, 127, 78, 0.5);
-    border-left: solid 0.1rem #ff0006;
+    border-left: solid 0.1rem rgba(255, 0, 0, 1);
 }
 .system-yellow{
-    background-color: rgba(205, 255, 44, 0.5);
-    border-left: solid 0.1rem #cdff2c;
+    background-color: rgba(255, 208, 40, 0.5);
+    border-left: solid 0.1rem rgba(255, 208, 40, 1);
+}
+
+#mouse-indicator-int{
+    width: 0.3rem;
+    height: 0.3rem;
+    background-color: #fff;
+    display: inline-block;
+}
+#mouse-indicator{
+    color: #fff;
+    font-size: 0.5rem;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
