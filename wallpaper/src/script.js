@@ -8,7 +8,7 @@ var idle_confirm = 0;
 var idle_time = 0;
 const idle_time_max = 300;
 const recharge_speed = 20; //multiplier - 60 is recharge in 1hr / speed_factor
-const speed_factor = 120; //debug only.
+const speed_factor = 1; //debug only.
 const bar_length = 5;
 var iff_offline_time = 0;
 document.addEventListener("DOMContentLoaded", DOMContentLoaded, false);
@@ -45,6 +45,14 @@ document.onmousemove = document.onmousewheel = document.onmousedown = function(e
         idle_confirm++;
     }
 
+    if(event.pageX === 0 && event.pageY === 0 &&
+        Math.abs(lastX - event.pageX) > 40 &&
+        Math.abs(lastY - event.pageY) > 40){
+        screen_console_log("Welcome back, Misaka_0x447f.");
+        screen_console_log("It has been: " + friendly_time_duration_eng(idle_time) + " since your last login.");
+        screen_console_log("Initializing HUD");
+    }
+
     lastX = event.pageX;
     lastY = event.pageY;
 };
@@ -74,12 +82,15 @@ function updateMe(){
 function rest_timer() {
     idle_time += 0.1 * speed_factor;
     if(idle_time > idle_time_max){
-        gui_duration += 0.1 * recharge_speed * speed_factor;
-        if(gui_duration > dur_capacity){
+        if(gui_duration < dur_capacity){
+            gui_duration += 0.1 * recharge_speed * speed_factor;
+        }else if(gui_duration > dur_capacity){
             gui_duration = dur_capacity
+        }else{
+            screen_console_log("[" + (new Date()).getTime() + "]Capacity recharged.")
         }
     }else{
-        gui_duration -= (Math.random() / 10 + 0.1) * speed_factor;
+        gui_duration -= (Math.random() / 20 + 0.1) * speed_factor;
     }
     var bar_factor = gui_duration / dur_capacity;
     var target_html_pre = "I".repeat(Math.floor(bar_factor * bar_length * 10)) + "<span style=\"opacity: 0.2\">" +
@@ -152,18 +163,24 @@ function friendly_time_duration(seconds){
         return Math.floor(seconds / 3600) + "小时前";
     }
 }
+function friendly_time_duration_eng(seconds){
+    if(seconds < 60){
+        return Math.floor(seconds) + " second(s)";
+    }else if(seconds < 3600){
+        return Math.floor(seconds / 60) + "minute(s)";
+    }else{
+        return Math.floor(seconds / 3600) + "hour(s)";
+    }
+}
 function screen_console_log(log_content){
     console.log(log_content);
     var prev_content = document.getElementById("console-content").innerHTML.split("<br>");
     prev_content = prev_content.clean("");
     prev_content.push(log_content);
     var back_content = "";
-    for(var i = prev_content.length - 5; i < prev_content.length; i++) {
+    for(var i = prev_content.length - 8; i < prev_content.length; i++) {
         if(i >= 0){
             back_content += prev_content[i] + "<br/>";
-//            if(i <= prev_content.length){
-//                back_content += "<br>";
-//            }
         }
     }
     document.getElementById("console-content").innerHTML = back_content;
@@ -187,4 +204,67 @@ function class_add(obj, name){
 function class_remove(obj, name){
     obj.classList.remove(name);
     return true;
+}
+function get_random_comm(){
+    //TODO: fix name && timer error
+    var comm_base = [
+        [
+            "wei, zaima",
+            "buzai, cmn",
+            "buzai, cmn!",
+            "惊了，怎么御坂里面也有猛男的"
+        ],
+        [
+            "ping",
+            "pong"
+        ],
+        [
+            "0x447f",
+            "感觉这样毫无意义。",
+            "得寻找有意义的片段才行。",
+            "但是即便找到了有意义的对话",
+            "也知道那是自己制作的。",
+            "总之，写了一个壁纸，",
+            "来幻想自己加入了御坂网络。",
+            "0x4480",
+            "Sodayo(便乘)",
+            "小姑娘要不要来包昏睡红茶呢",
+            "0x447f",
+            "我想我没心情开玩笑。"
+        ]
+    ];
+    function get_random_continue(comm_array, types, typesarg){
+        if(comm_array.length > 1 && isHex(comm_array[0])){
+            var target_string = comm_array[0].slice(2);
+            setInterval(function(){
+                get_random_continue(comm_array, "single", target_string)
+            }, ((Math.random() * 5) + 5) * 1000);
+            send_msg(comm_array, "single", target_string)
+        }else if(comm_array.length > 0){
+            setInterval(function(){
+                get_random_continue(comm_array, types, typesarg)
+            }, ((Math.random() * 5) + 5) * 1000);
+            send_msg(comm_array, types, typesarg);
+        }
+        function send_msg(comm_array, types, typesarg){
+            if(isHex(comm_array[0])){
+                comm_array.shift();
+            }
+            if(types === "single"){
+                screen_console_log("Misaka_0x" + typesarg + ": " + comm_array[0]);
+            }else{
+                var misaka = Math.floor((Math.random() * 9950) + 10050).toString(16);
+                screen_console_log("Misaka_0x" + misaka + ": " + comm_array[0]);
+            }
+            comm_array.shift();
+        }
+    }
+    var run_random_comm = Math.floor(Math.random() * comm_base.length * 1.5);
+    if(run_random_comm < comm_base.length){
+        get_random_continue(comm_base[run_random_comm]);
+    }
+    setTimeout(get_random_comm, ((Math.random() * 60) + 30) * 1000);
+}
+function isHex(a){
+    return parseInt(a).toString(16) === a.slice(2);
 }
