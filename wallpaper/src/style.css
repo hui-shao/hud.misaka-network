@@ -37,7 +37,7 @@ html{
     font-size: 1.3rem;
 }
 .small-indicator{
-    font-size: 0.75rem;
+    font-size: 0.7rem;
 }
 .system-green{
     color: #74dfff;
@@ -64,7 +64,7 @@ html{
     border-left: solid 0.1rem rgba(255, 0, 0, 1);
 }
 .system-yellow{
-    background-color: rgba(255, 208, 40, 0.5);
+    background-color: rgba(255, 208, 40, 0.3);
     border-left: solid 0.1rem rgba(255, 208, 40, 1);
 }
 

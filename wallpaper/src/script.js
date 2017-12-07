@@ -2,14 +2,16 @@ var lastX = 0;
 var lastY = 0;
 var stabledX = 0;
 var stabledY = 0;
-var gui_duration = 3600;
-const dur_capacity = 3600;
+var gui_duration = 7200;
+const dur_capacity = 7200;
 var idle_confirm = 0;
 var idle_time = 0;
 const idle_time_max = 300;
-const recharge_speed = 60; //multiplier - 60 is recharge in 1hr / speed_factor
-const speed_factor = 1; //1 is stand for 30min-1hr, 4 is 7.5min-15min. debug only.
-const bar_length = 6;
+const recharge_speed = 20; //multiplier - 60 is recharge in 1hr / speed_factor
+const speed_factor = 120; //debug only.
+const bar_length = 5;
+var iff_offline_time = 0;
+document.addEventListener("DOMContentLoaded", DOMContentLoaded, false);
 document.onmousemove = document.onmousewheel = document.onmousedown = function(event) {
     /*
     The following code has been disabled due to:
@@ -39,22 +41,20 @@ document.onmousemove = document.onmousewheel = document.onmousedown = function(e
 
     // Use event.pageX / event.pageY here
 
-    idle_confirm++;
-
-    if(Math.abs(lastY - event.pageY) > 10 || Math.abs(lastX - event.pageX) > 10){
-        idle_confirm = 2147483647;
+    if(lastX !== 0 && lastY !== 0){
+        idle_confirm++;
     }
 
     lastX = event.pageX;
     lastY = event.pageY;
-
-    screen_console_log("" + lastX + ", " + lastY + "");
 };
-window.onload = function () {
+function DOMContentLoaded(){
     setInterval(updateMe, 33);
     setInterval(rest_timer, 100);
-    setInterval(idle_count_func, 333);
-};
+    setInterval(idle_count_func, 1000);
+    setInterval(auto_timer, 1000);
+    setInterval(long_term_timer, 30000);
+}
 function updateMe(){
     function make_range(value, range, percent){
         return value - range / 2 + range * percent / 100;
@@ -99,10 +99,49 @@ function rest_timer() {
     document.getElementById("hud-progressbar").innerHTML = target_html;
 }
 function idle_count_func() {
-    if(idle_confirm > 3){
+    if(idle_confirm > 5){
         idle_time = 0;
     }
     idle_confirm = 0;
+}
+function auto_timer(){
+    iff_offline_time += speed_factor;
+}
+function long_term_timer(){
+    var bar_factor = gui_duration / dur_capacity;
+    var bar_object = document.getElementById("left-bottom-hud-1-dur-title");
+    var iff_title_object = document.getElementById("left-bottom-hud-1-iff-title");
+    var iff_object = document.getElementById("left-bottom-hud-1-iff-content");
+    if(bar_factor < 2 / bar_length && bar_factor > 0.2 / bar_length){
+        class_remove(bar_object, "system-red");
+        class_add(bar_object, "system-yellow");
+    }else if(bar_factor <= 0.2 / bar_length) {
+        class_add(bar_object, "system-red");
+        class_remove(bar_object, "system-yellow");
+    }else{
+        class_remove(bar_object, "system-red");
+        class_remove(bar_object, "system-yellow");
+    }
+    var random_iff = Math.random();
+    if(bar_factor < (2 - random_iff) / bar_length && bar_factor > 1 / bar_length) {
+        iff_object.innerHTML = "状态存疑/不确定 - 等待后续判断";
+        class_add(iff_title_object, "system-yellow");
+        class_remove(iff_title_object, "system-red");
+        iff_offline_time = 0;
+    }else if((bar_factor > (1 - random_iff / 3) / bar_length) && bar_factor <= 1 / bar_length){
+        class_remove(iff_title_object, "system-yellow");
+        class_add(iff_title_object, "system-red");
+        iff_object.innerHTML = "停止工作 - " + friendly_time_duration(iff_offline_time);
+    }else if(bar_factor <= (1 - random_iff / 3) / bar_length) {
+        iff_object.innerHTML = "脱机 - " + friendly_time_duration(iff_offline_time);
+        class_remove(iff_title_object, "system-yellow");
+        class_add(iff_title_object, "system-red");
+    }else{
+        class_remove(iff_title_object, "system-yellow");
+        class_remove(iff_title_object, "system-red");
+        iff_object.innerHTML = "联机";
+        iff_offline_time = 0;
+    }
 }
 function friendly_time_duration(seconds){
     if(seconds < 60){
@@ -138,3 +177,14 @@ Array.prototype.clean = function(deleteValue) {
     }
     return this;
 };
+function class_exist(obj, name){
+    return obj.classList.contains(name);
+}
+function class_add(obj, name){
+    obj.classList.add(name);
+    return true;
+}
+function class_remove(obj, name){
+    obj.classList.remove(name);
+    return true;
+}
