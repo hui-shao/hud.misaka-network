@@ -93,6 +93,7 @@ function rest_timer() {
         gui_duration -= (Math.random() / 20 + 0.1) * speed_factor;
     }
     var bar_factor = gui_duration / dur_capacity;
+    //TODO: Method (repeat) expression is not of Function type
     var target_html_pre = "I".repeat(Math.floor(bar_factor * bar_length * 10)) + "<span style=\"opacity: 0.2\">" +
                     "I".repeat(Math.floor(bar_length * 10 - bar_factor * bar_length * 10)) + "</span>";
     var i_count = 0;
