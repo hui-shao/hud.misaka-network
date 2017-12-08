@@ -78,7 +78,6 @@ function updateMe(){
 //        "rotate3d(" + make_range(0.15, 0.15, event.pageY/10.8) + ", 0, -0.015, 15deg)";
     document.getElementById("left-top-hud-1").style.top = make_range(8, 1.3, -stabledY/10.8) + "rem";
     document.getElementById("left-top-hud-1").style.left = make_range(5, 1, -stabledX/19.2) + "rem";
-    document.getElementById("left-bottom-hud-1-active-monitor-timer").innerHTML = friendly_time_duration(idle_time);
 }
 function rest_timer() {
     idle_time += 0.1 * speed_factor;
@@ -121,6 +120,9 @@ function idle_count_func() {
 }
 function auto_timer(){
     iff_offline_time += speed_factor;
+    var dateobj = new Date();
+    document.getElementById("left-bottom-hud-1-date-time").innerHTML = dateobj.toString().slice(0, 33);
+    document.getElementById("left-bottom-hud-1-active-monitor-timer").innerHTML = friendly_time_duration(idle_time);
 }
 function long_term_timer(){
     var bar_factor = gui_duration / dur_capacity;

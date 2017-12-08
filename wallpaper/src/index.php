@@ -14,14 +14,16 @@
         recognized
     </div>
 -->
-    <div id="left-top-hud-1" class="hud border-me">
-        <span class="hud small-indicator">
-            link up
-        </span>
-        <span class="hud small-indicator">
-            44xx, 10.0Gbps, full-duplex
-        </span>
-        <br/>
+    <div id="left-top-hud-1" class="hud">
+        <div class="hud small-indicator border-me">
+            wlan0: link up, 4xxx, 10.0Gbps, full-duplex
+        </div>
+        <div class="border-me">
+            Misaka distributed computing network
+        </div>
+        <div class="small-indicator border-me">
+            connected, <span class="system-blue">secured</span>, logged in as Misaka_0x447f
+        </div>
         <!--
         <span class="hud">
             <span class="hud small-indicator">当前任务目标：</span>回收
@@ -46,19 +48,27 @@
         <div id="left-bottom-hud-1-pass" style="background: transparent;">
             <span class="hud-title" style="border: 0;"> </span>
         </div>
+        <div class="border-me small-indicator">
+            你的HUD正在被监视并受到保护。
+        </div>
         <div id="left-bottom-hud-1-active-monitor" class="border-me small-indicator">
             最后活动
             <span id="left-bottom-hud-1-active-monitor-timer">
-                  0秒前
+                ---
             </span>
         </div>
-        <div id="left-bottom-hud-1-pass" style="background: transparent;">
-            <span class="hud-title" style="border: 0;"> </span>
+        <div id="left-bottom-hud-1-date-time" class="border-me nano-indicator">
+                --- --- -- ---- --:--:-- GMT-----
         </div>
+        <div id="left-bottom-hud-1-pass" style="background: transparent;">
+            <span class="hud-title small-indicator" style="border: 0;"> </span>
+        </div>
+        <!--
         <div id="left-bottom-hud-1-env">
             <span class="hud-title system-yellow">ENV</span>
             传感器脱机
         </div>
+        -->
         <div id="left-bottom-hud-1-iff">
             <span id="left-bottom-hud-1-iff-title" class="hud-title">IFF</span>
             <span id="left-bottom-hud-1-iff-content">联机</span>
