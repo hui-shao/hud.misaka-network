@@ -45,12 +45,14 @@ document.onmousemove = document.onmousewheel = document.onmousedown = function(e
         idle_confirm++;
     }
 
+    /*
     if(event.pageX === 0 && event.pageY === 0 &&
         Math.abs(lastX - event.pageX) > 40 &&
         Math.abs(lastY - event.pageY) > 40){
         screen_console_log("Welcome back, Misaka_0x447f.");
         screen_console_log("Initializing HUD");
     }
+    */
 
     lastX = event.pageX;
     lastY = event.pageY;
@@ -86,7 +88,9 @@ function rest_timer() {
         }else if(gui_duration > dur_capacity){
             gui_duration = dur_capacity
         }else{
+            /*
             screen_console_log("[" + (new Date()).getTime() + "]Capacity recharged.")
+            */
         }
     }else{
         gui_duration -= (Math.random() / 20 + 0.1) * speed_factor;
@@ -163,6 +167,7 @@ function friendly_time_duration(seconds){
         return Math.floor(seconds / 3600) + "小时前";
     }
 }
+/*
 function friendly_time_duration_eng(seconds){
     if(seconds < 60){
         return Math.floor(seconds) + " second(s)";
@@ -171,7 +176,9 @@ function friendly_time_duration_eng(seconds){
     }else{
         return Math.floor(seconds / 3600) + "hour(s)";
     }
-}
+}*/
+
+/*
 function screen_console_log(log_content){
     console.log(log_content);
     var prev_content = document.getElementById("console-content").innerHTML.split("<br>");
@@ -194,9 +201,12 @@ Array.prototype.clean = function(deleteValue) {
     }
     return this;
 };
+*/
+/*
 function class_exist(obj, name){
     return obj.classList.contains(name);
 }
+*/
 function class_add(obj, name){
     obj.classList.add(name);
     return true;
@@ -205,8 +215,9 @@ function class_remove(obj, name){
     obj.classList.remove(name);
     return true;
 }
+/*
 function get_random_comm(){
-    //TODO: fix name && timer error
+    //NO DO: fix name && timer error
     var comm_base = [
         [
             "wei, zaima",
@@ -268,3 +279,4 @@ function get_random_comm(){
 function isHex(a){
     return parseInt(a).toString(16) === a.slice(2);
 }
+*/

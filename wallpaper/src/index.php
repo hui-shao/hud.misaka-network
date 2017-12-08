@@ -35,12 +35,14 @@
         -->
     </div>
     <div id="left-bottom-hud-1" class="hud">
+        <!---
         <div id="console" class="hud-title">
             CONSOLE
         </div>
         <div id="console-content" class="border-me small-indicator">
             ---HUD START---
         </div>
+        --->
         <div id="left-bottom-hud-1-pass" style="background: transparent;">
             <span class="hud-title" style="border: 0;"> </span>
         </div>
