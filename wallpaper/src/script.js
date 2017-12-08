@@ -12,7 +12,19 @@ const speed_factor = 1; //debug only.
 const bar_length = 5;
 var iff_offline_time = 0;
 document.addEventListener("DOMContentLoaded", DOMContentLoaded, false);
-document.onmousemove = document.onmousewheel = document.onmousedown = function(event) {
+document.onmousewheel = function(){
+    idle_confirm = 2147483647;
+};
+document.onmousedown = function(){
+    idle_confirm = 2147483647;
+};
+document.onmouseup = function(){
+    idle_confirm = 2147483647;
+};
+document.onkeydown = function(){
+    idle_confirm = 2147483647;
+};
+document.onmousemove = function(event) {
     /*
     The following code has been disabled due to:
     There are no need to support old IE.
@@ -41,9 +53,9 @@ document.onmousemove = document.onmousewheel = document.onmousedown = function(e
 
     // Use event.pageX / event.pageY here
 
-    if(lastX !== 0 && lastY !== 0){
-        idle_confirm++;
-    }
+    idle_confirm++;
+    lastX = event.pageX;
+    lastY = event.pageY;
 
     /*
     if(event.pageX === 0 && event.pageY === 0 &&
@@ -53,9 +65,6 @@ document.onmousemove = document.onmousewheel = document.onmousedown = function(e
         screen_console_log("Initializing HUD");
     }
     */
-
-    lastX = event.pageX;
-    lastY = event.pageY;
 };
 function DOMContentLoaded(){
     setInterval(updateMe, 33);
