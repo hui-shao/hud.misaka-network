@@ -9,4 +9,12 @@ No many environment requirement, just deploy on any http server
 
 Or install in steam workshop: http://steamcommunity.com/sharedfiles/filedetails/?id=1223069455
 
-You will need to rename index.php to index.html if you want deploy to wallpaper engine yourself.
+You will need to do these if you want deploy to wallpaper engine yourself:
+
+drop an image.png to the source code root
+
+`mv image.png wallpaper.png`
+
+`mv index.php index.html`
+
+*do it yourself in style.css>html if you want webp or other format or other filename. 
