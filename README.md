@@ -15,6 +15,4 @@ drop an image.png to the source code root
 
 `mv image.png wallpaper.png`
 
-`mv index.php index.html`
-
 *do it yourself in style.css>html if you want webp or other format or other filename. 
