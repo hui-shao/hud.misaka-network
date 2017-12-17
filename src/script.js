@@ -14,15 +14,19 @@ var iff_offline_time = 0;
 document.addEventListener("DOMContentLoaded", DOMContentLoaded, false);
 document.onmousewheel = function(){
     idle_confirm = 2147483647;
+    idle_count_func();
 };
 document.onmousedown = function(){
     idle_confirm = 2147483647;
+    idle_count_func();
 };
 document.onmouseup = function(){
     idle_confirm = 2147483647;
+    idle_count_func();
 };
 document.onkeydown = function(){
     idle_confirm = 2147483647;
+    idle_count_func();
 };
 document.onmousemove = function(event) {
     /*
@@ -134,6 +138,11 @@ function auto_timer(){
     document.getElementById("left-bottom-hud-1-active-monitor-timer").innerHTML = friendly_time_duration(idle_time);
 }
 function long_term_timer(){
+    var iff_offline = document.getElementById("IFF-offline");
+    if(iff_offline_played === undefined){
+        iff_offline_played = 0;
+    }
+
     var bar_factor = gui_duration / dur_capacity;
     var bar_object = document.getElementById("left-bottom-hud-1-dur-title");
     var iff_title_object = document.getElementById("left-bottom-hud-1-iff-title");
@@ -141,12 +150,19 @@ function long_term_timer(){
     if(bar_factor < 2 / bar_length && bar_factor > 0.2 / bar_length){
         class_remove(bar_object, "system-red");
         class_add(bar_object, "system-yellow");
+        iff_offline_played = 0;
     }else if(bar_factor <= 0.2 / bar_length) {
         class_add(bar_object, "system-red");
         class_remove(bar_object, "system-yellow");
+        if(iff_offline_played < 3){
+            iff_offline.currentTime = 0;
+            iff_offline.play();
+            iff_offline_played++;
+        }
     }else{
         class_remove(bar_object, "system-red");
         class_remove(bar_object, "system-yellow");
+        iff_offline_played = 0;
     }
     var random_iff = Math.random();
     if(bar_factor < (2 - random_iff) / bar_length && bar_factor > 1 / bar_length) {
