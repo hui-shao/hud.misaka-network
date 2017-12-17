@@ -8,7 +8,7 @@ var idle_confirm = 0;
 var idle_time = 0;
 const idle_time_max = 300;
 const recharge_speed = 20; //multiplier - 60 is recharge in 1hr / speed_factor
-const speed_factor = 1; //debug only.
+const speed_factor = 1200; //debug only.
 const bar_length = 5;
 var iff_offline_time = 0;
 document.addEventListener("DOMContentLoaded", DOMContentLoaded, false);
@@ -93,7 +93,7 @@ function updateMe(){
     document.getElementById("left-top-hud-1").style.left = make_range(5, 1, -stabledX/19.2) + "rem";
 }
 function rest_timer() {
-    idle_time += 0.1 * speed_factor;
+    idle_time += 0.1;
     if(idle_time > idle_time_max){
         if(gui_duration < dur_capacity){
             gui_duration += 0.1 * recharge_speed * speed_factor;
@@ -108,9 +108,8 @@ function rest_timer() {
         gui_duration -= (Math.random() / 20 + 0.1) * speed_factor;
     }
     var bar_factor = gui_duration / dur_capacity;
-    //TODO: Method (repeat) expression is not of Function type
-    var target_html_pre = "I".repeat(Math.floor(bar_factor * bar_length * 10)) + "<span style=\"opacity: 0.2\">" +
-                    "I".repeat(Math.floor(bar_length * 10 - bar_factor * bar_length * 10)) + "</span>";
+    var target_html_pre = string_repeat("I", Math.floor(bar_factor * bar_length * 10)) + "<span style=\"opacity: 0.2\">" +
+        string_repeat("I", limit_range(Math.floor(bar_length * 10 - bar_factor * bar_length * 10)), 0, bar_length * 10) + "</span>";
     var i_count = 0;
     var target_html = "";
     for(var i=0; i<target_html_pre.length; i++){
@@ -250,6 +249,28 @@ function class_add(obj, name){
 function class_remove(obj, name){
     obj.classList.remove(name);
     return true;
+}
+function limit_range(value, a, b){
+    if(value<a){
+        return a;
+    }
+    if(value>b){
+        return b;
+    }
+    return value;
+}
+function string_repeat(string, i){
+    var returns = "";
+    while(i > 0){
+        if(i > 10){
+            i-=10;
+            returns += string + string + string + string + string + string + string + string + string + string
+        }else{
+            i--;
+            returns += string
+        }
+    }
+    return returns;
 }
 /*
 function get_random_comm(){
