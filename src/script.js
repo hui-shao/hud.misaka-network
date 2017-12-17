@@ -138,51 +138,60 @@ function auto_timer(){
     document.getElementById("left-bottom-hud-1-active-monitor-timer").innerHTML = friendly_time_duration(idle_time);
 }
 function long_term_timer(){
-    var iff_offline = document.getElementById("IFF-offline");
-    if(iff_offline_played === undefined){
-        iff_offline_played = 0;
-    }
-
     var bar_factor = gui_duration / dur_capacity;
     var bar_object = document.getElementById("left-bottom-hud-1-dur-title");
     var iff_title_object = document.getElementById("left-bottom-hud-1-iff-title");
     var iff_object = document.getElementById("left-bottom-hud-1-iff-content");
-    if(bar_factor < 2 / bar_length && bar_factor > 0.2 / bar_length){
+    if(bar_factor < 2 / bar_length && bar_factor > 0.5 / bar_length){
         class_remove(bar_object, "system-red");
         class_add(bar_object, "system-yellow");
-        iff_offline_played = 0;
-    }else if(bar_factor <= 0.2 / bar_length) {
+    }else if(bar_factor <= 0.5 / bar_length){
         class_add(bar_object, "system-red");
         class_remove(bar_object, "system-yellow");
+    }else{
+        class_remove(bar_object, "system-red");
+        class_remove(bar_object, "system-yellow");
+    }
+
+    var iff_offline = document.getElementById("IFF-offline");
+    if(typeof(iff_offline_played) === "undefined"){
+        iff_offline_played = 0;
+    }
+    function play_iff_offline_voice(){
         if(iff_offline_played < 3){
             iff_offline.currentTime = 0;
             iff_offline.play();
             iff_offline_played++;
+            console.log("iff offline");
         }
-    }else{
-        class_remove(bar_object, "system-red");
-        class_remove(bar_object, "system-yellow");
+    }
+    function reset_iff_offline_voice(){
         iff_offline_played = 0;
     }
+
     var random_iff = Math.random();
     if(bar_factor < (2 - random_iff) / bar_length && bar_factor > 1 / bar_length) {
         iff_object.innerHTML = "状态存疑/不确定 - 等待后续判断";
         class_add(iff_title_object, "system-yellow");
         class_remove(iff_title_object, "system-red");
         iff_offline_time = 0;
+        reset_iff_offline_voice();
     }else if((bar_factor > (1 - random_iff / 3) / bar_length) && bar_factor <= 1 / bar_length){
         class_remove(iff_title_object, "system-yellow");
         class_add(iff_title_object, "system-red");
         iff_object.innerHTML = "停止工作 - " + friendly_time_duration(iff_offline_time);
+        play_iff_offline_voice();
     }else if(bar_factor <= (1 - random_iff / 3) / bar_length) {
         iff_object.innerHTML = "脱机 - " + friendly_time_duration(iff_offline_time);
         class_remove(iff_title_object, "system-yellow");
         class_add(iff_title_object, "system-red");
+        play_iff_offline_voice();
     }else{
         class_remove(iff_title_object, "system-yellow");
         class_remove(iff_title_object, "system-red");
         iff_object.innerHTML = "联机";
         iff_offline_time = 0;
+        reset_iff_offline_voice();
     }
 }
 function friendly_time_duration(seconds){
