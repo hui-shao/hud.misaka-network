@@ -8,7 +8,7 @@ var idle_confirm = 0;
 var idle_time = 0;
 const idle_time_max = 300;
 const recharge_speed = 20; //multiplier - 60 is recharge in 1hr / speed_factor
-const speed_factor = 1; //debug only.
+const speed_factor = 1; //debug only. recommended debug value: 180
 const bar_length = 5;
 var iff_offline_time = 0;
 document.addEventListener("DOMContentLoaded", DOMContentLoaded, false);
