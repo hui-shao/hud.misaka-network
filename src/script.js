@@ -141,10 +141,10 @@ function long_term_timer(){
     var bar_object = document.getElementById("left-bottom-hud-1-dur-title");
     var iff_title_object = document.getElementById("left-bottom-hud-1-iff-title");
     var iff_object = document.getElementById("left-bottom-hud-1-iff-content");
-    if(bar_factor < 2 / bar_length && bar_factor > 0.5 / bar_length){
+    if(bar_factor < 0.4 && bar_factor > 0.1){
         class_remove(bar_object, "system-red");
         class_add(bar_object, "system-yellow");
-    }else if(bar_factor <= 0.5 / bar_length){
+    }else if(bar_factor <= 0.1){
         class_add(bar_object, "system-red");
         class_remove(bar_object, "system-yellow");
     }else{
@@ -153,19 +153,10 @@ function long_term_timer(){
     }
 
     var iff_offline = document.getElementById("IFF-offline");
-    if(typeof(iff_offline_played) === "undefined"){
-        iff_offline_played = 0;
-    }
     function play_iff_offline_voice(){
-        if(iff_offline_played < 3){
-            iff_offline.currentTime = 0;
+        if(idle_time < 15){
             iff_offline.play();
-            iff_offline_played++;
-            console.log("iff offline");
         }
-    }
-    function reset_iff_offline_voice(){
-        iff_offline_played = 0;
     }
 
     var random_iff = Math.random();
@@ -174,7 +165,6 @@ function long_term_timer(){
         class_add(iff_title_object, "system-yellow");
         class_remove(iff_title_object, "system-red");
         iff_offline_time = 0;
-        reset_iff_offline_voice();
     }else if((bar_factor > (1 - random_iff / 3) / bar_length) && bar_factor <= 1 / bar_length){
         class_remove(iff_title_object, "system-yellow");
         class_add(iff_title_object, "system-red");
@@ -190,7 +180,6 @@ function long_term_timer(){
         class_remove(iff_title_object, "system-red");
         iff_object.innerHTML = "联机";
         iff_offline_time = 0;
-        reset_iff_offline_voice();
     }
 }
 function friendly_time_duration(seconds){
