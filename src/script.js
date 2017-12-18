@@ -11,6 +11,7 @@ const recharge_speed = 20; //multiplier - 60 is recharge in 1hr / speed_factor
 const speed_factor = 1; //debug only. recommended debug value: 180
 const bar_length = 5;
 var iff_offline_time = 0;
+var iff_offline_playcount = 0;
 document.addEventListener("DOMContentLoaded", DOMContentLoaded, false);
 document.onmousewheel = function(){
     idle_confirm = 2147483647;
@@ -141,10 +142,10 @@ function long_term_timer(){
     var bar_object = document.getElementById("left-bottom-hud-1-dur-title");
     var iff_title_object = document.getElementById("left-bottom-hud-1-iff-title");
     var iff_object = document.getElementById("left-bottom-hud-1-iff-content");
-    if(bar_factor < 0.4 && bar_factor > 0.1){
+    if(bar_factor < 0.4 && bar_factor > 0.15){
         class_remove(bar_object, "system-red");
         class_add(bar_object, "system-yellow");
-    }else if(bar_factor <= 0.1){
+    }else if(bar_factor <= 0.15){
         class_add(bar_object, "system-red");
         class_remove(bar_object, "system-yellow");
     }else{
@@ -154,23 +155,28 @@ function long_term_timer(){
 
     var iff_offline = document.getElementById("IFF-offline");
     function play_iff_offline_voice(){
-        if(idle_time < 15){
+        if(idle_time < 15 && iff_offline_playcount < 5){
+            iff_offline_playcount++;
             iff_offline.play();
         }
     }
+    function reset_iff_playcount() {
+        iff_offline_playcount = 0;
+    }
 
     var random_iff = Math.random();
-    if(bar_factor < (2 - random_iff) / bar_length && bar_factor > 1 / bar_length) {
+    if(bar_factor < 0.3 - random_iff * 0.2 && bar_factor > 0.1 - random_iff * 0.05) {
         iff_object.innerHTML = "状态存疑/不确定 - 等待后续判断";
         class_add(iff_title_object, "system-yellow");
         class_remove(iff_title_object, "system-red");
         iff_offline_time = 0;
-    }else if((bar_factor > (1 - random_iff / 3) / bar_length) && bar_factor <= 1 / bar_length){
+        reset_iff_playcount();
+    }else if(bar_factor > 0 && bar_factor <= 0.1 - random_iff * 0.05){
         class_remove(iff_title_object, "system-yellow");
         class_add(iff_title_object, "system-red");
         iff_object.innerHTML = "停止工作 - " + friendly_time_duration(iff_offline_time);
         play_iff_offline_voice();
-    }else if(bar_factor <= (1 - random_iff / 3) / bar_length) {
+    }else if(bar_factor <= 0) {
         iff_object.innerHTML = "脱机 - " + friendly_time_duration(iff_offline_time);
         class_remove(iff_title_object, "system-yellow");
         class_add(iff_title_object, "system-red");
@@ -180,6 +186,7 @@ function long_term_timer(){
         class_remove(iff_title_object, "system-red");
         iff_object.innerHTML = "联机";
         iff_offline_time = 0;
+        reset_iff_playcount();
     }
 }
 function friendly_time_duration(seconds){
