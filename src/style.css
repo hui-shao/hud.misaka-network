@@ -33,11 +33,10 @@ body{
     text-decoration: none;
 }
 .button{
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 0.3rem 0.5rem;
+    padding: 0.3rem 1rem;
 }
 .hover-white:hover{
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.3);
 }
 .txt{
     text-shadow: #000 0 0 0.5rem;
@@ -45,27 +44,18 @@ body{
 .right-align{
     text-align: right;
 }
-.custom-scroll-bar{
-    scrollbar-face-color: #889B9F;
-    scrollbar-shadow-color: #3D5054;
-    scrollbar-highlight-color: #C3D6DA;
-    scrollbar-3dlight-color: #3D5054;
-    scrollbar-darkshadow-color: #85989C;
-    scrollbar-track-color: #95A6AA;
-    scrollbar-arrow-color: #FFD6DA;
-}
 .border-me-left{
     border-left: solid 0.1rem rgba(230, 230, 230, 0.8);
-    padding-left: 0.5rem
+    padding-left: 1rem;
 }
 .border-me-right{
     border-right: solid 0.1rem rgba(230, 230, 230, 0.8);
-    padding-right: 0.5rem
+    padding-right: 1rem;
 }
 .hud-title{
     font-family: "Source Code Pro", "Consolas", "MS Gothic", monospace;
     border-left: solid 0.1rem rgba(230, 230, 230, 0.8);
-    padding: 0 0.5rem;
+    padding: 0 0.5rem 0 1rem;
 }
 .hud-progressbar{
     font-family: "Microsoft JhengHei UI", sans-serif;
