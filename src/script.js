@@ -92,6 +92,9 @@ function updateMe(){
 //        "rotate3d(" + make_range(0.15, 0.15, event.pageY/10.8) + ", 0, -0.015, 15deg)";
     document.getElementById("left-top-hud-1").style.top = make_range(8, 1.3, -stabledY/10.8) + "rem";
     document.getElementById("left-top-hud-1").style.left = make_range(5, 1, -stabledX/19.2) + "rem";
+
+    document.getElementById("right-top-hud-1").style.top = make_range(8, 1.3, -stabledY/10.8) + "rem";
+    document.getElementById("right-top-hud-1").style.right = make_range(5, 1, stabledX/19.2) + "rem";
 }
 function rest_timer() {
     idle_time += 0.1;
@@ -267,6 +270,9 @@ function string_repeat(string, i){
         }
     }
     return returns;
+}
+function button1_click(){
+    document.getElementById("right-top-hud-notice-group").style.display = "none";
 }
 /*
 function get_random_comm(){
