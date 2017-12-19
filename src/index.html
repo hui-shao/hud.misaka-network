@@ -14,6 +14,9 @@
         recognized
     </div>
 -->
+    <div id="image" class="background-image">
+
+    </div>
     <div id="left-top-hud-1" class="hud">
         <div class="hud small-indicator border-me-left">
             wlan0: link up, 4xxx, 10.0Gbps, full-duplex
@@ -90,13 +93,26 @@
     </div>
     <div id="right-top-hud-1" class="hud">
         <div id="right-top-hud-notice-group">
+            <div id="right-top-hud-notice-title" class="button-title txt border-me-right right-align hover-white">
+                &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+            </div>
             <a class="button_link" href="notice/index.html">
                 <div id="right-top-hud-notice-okay" class="button txt border-me-right right-align hover-white">
-                    Manual/用户手册 &lt;&lt;&lt;
+                    Manual/用户手册
                 </div>
             </a>
             <div id="right-top-hud-notice-close" class="button txt border-me-right right-align hover-white" onclick="button1_click()">
-                Close/关闭 &lt;&lt;&lt;
+                Close/关闭
+            </div>
+            <div style="position: absolute;
+                        top: 0.4rem;
+                        left: 0.4rem;
+                        background-color: rgba(255, 255, 255, 0.2);
+                        z-index: -1000;
+                        width: 100%;
+                        height: 100%;
+                        border-right: solid 0.1rem rgba(255, 255, 255, 0.6);
+                        ">
             </div>
         </div>
     </div>
