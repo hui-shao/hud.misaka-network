@@ -6,9 +6,9 @@ Based on [hud.misaka-network](https://github.com/Misaka-0x447f/hud.misaka-networ
 
 ### Demo
 
-![demo1](https://raw.githubusercontent.com/hui-shao/MisakaHUD/master/demo1.png)
+![demo1](https://raw.githubusercontent.com/hui-shao/hud.misaka-network/master/demo1.png)
 
 ### Get Start
 
-Follow this [README1.md](https://github.com/hui-shao/MisakaHUD/blob/master/README1.md)
+Follow this [README1.md](https://github.com/hui-shao/hud.misaka-network/blob/master/README1.md)
 
